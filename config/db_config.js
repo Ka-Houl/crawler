@@ -9,7 +9,7 @@ module.exports = {
                 idle: 1000,
             },
         },
-        // ZqF73GZtLrdxyFnB
+        // 数据库名称  帐号  密码
         conf: ['txclass', 'root', '12345678'],
     },
 };

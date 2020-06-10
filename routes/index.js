@@ -6,8 +6,11 @@ const Qiniu = require('qiniu');
 const qiniu = Qiniu;
 // import qiniuconfig from './../config/config.js'
 const qiniuconfig = require('./../config/config.js');
+
+const { addSliderData } = require('../services/Slider');
+
 // console.log('qiniuconfig',qiniuconfig)
-console.log('nanoId',nanoId)
+console.log('nanoId', nanoId);
 router.get('/', async (ctx, next) => {
     await ctx.render('index', {
         title: 'Hello Koa 2!',
@@ -58,6 +61,7 @@ router.get('/kkk', async (ctx, next) => {
     console.log('result-----------', result);
 
     if (result && result.length) {
+        // 这里应该在控制器controllers里边写
         result.map(async item => {
             if (item.imgUrl && !item.img_key) {
                 const qiniu = qiniuconfig.qiniu;
@@ -73,8 +77,18 @@ router.get('/kkk', async (ctx, next) => {
                     if (imgData.key) {
                         item.imgKey = imgData.key;
                     }
+
+                    const result = await addSliderData(item);
+
+                    if (result) {
+                        console.log('数据创建成功！');
+                    } else {
+                        console.log('数据创建失败');
+                    }
+
+                    console.log(imgData);
                 } catch (err) {
-                  console.log('err',err)
+                    console.log('err', err);
                 }
             }
         });

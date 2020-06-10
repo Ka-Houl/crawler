@@ -7,11 +7,12 @@ const { STRING, INT } = require('../../config/db_type_config');
 //     cid: {
 //         comment: 'course ID'
 //     }
-// })   //定义一张叫slider的表   变成复数sliders
+// })   //定义一张叫slider的表   新建出的表会添加s变成复数sliders
 
 // })
-//定义一张叫slider的表   变成复数sliders
 
+
+//定义一张叫slider的表   新建出的表会添加s变成复数sliders
 const Slider = seq.define('slider', {
     // 这些是表的字段
 
