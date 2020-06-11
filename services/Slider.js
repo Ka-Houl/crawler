@@ -2,21 +2,22 @@ const SliderModel = require('../db/models/slider');
 
 class SliderService {
     async addSliderData(data) {
-        return await SliderModel.create(data);
+        // return await SliderModel.create(data);
 
-        // const cid = data.cid;
+        const cid = data.cid;
 
-        // const result = await SliderModel.findOne({
-        //     where: { cid },
-        // });
+        //找到已有  就更新
+        const result = await SliderModel.findOne({
+            where: { cid },
+        });
 
-        // if (result) {
-        //     return await SliderModel.update(data, {
-        //         where: { cid },
-        //     });
-        // } else {
-        //     return await SliderModel.create(data);
-        // }
+        if (result) {
+            return await SliderModel.update(data, {
+                where: { cid },
+            });
+        } else {
+            return await SliderModel.create(data);
+        }
     }
 
     async getSliderData() {
